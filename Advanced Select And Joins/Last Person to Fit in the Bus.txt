@@ -1,0 +1,2 @@
+
+select temp.person_name from(select turn, person_name, sum(weight) over (order by turn asc) as cum from queue group by turn,person_name) as temp where turn = (select max(turn)from (select turn, person_name, sum(weight) over (order by turn asc) as cum from queue group by turn,person_name) as temp where temp.cum<=1000 )

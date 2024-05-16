@@ -1,0 +1,1 @@
+select  max(val.num) as num from (select num,count(num) as c from mynumbers group by num)as val where val.c=1

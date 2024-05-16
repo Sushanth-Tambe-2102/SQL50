@@ -1,0 +1,3 @@
+select temp.id as employee_id,emp.name as name,temp.c as reports_count, temp.age as average_age from
+ ( select reports_to as id ,count(employee_id) as c, round(avg(age)) as age from employees where reports_to is not null group by reports_to )as temp join employees 
+AS emp ON emp.employee_id = temp.id  order by employee_id

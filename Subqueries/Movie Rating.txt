@@ -1,0 +1,8 @@
+(select q.name as results from (
+select distinct ur.user_id,count(ur.user_id) as c,ur.name from MovieRating mr  left join Users ur on ur.user_id=mr.user_id group by ur.user_id order by c desc ,ur.name asc )as q limit 1
+)
+union all
+(
+select q.title as results  from (
+select m.movie_id,avg(mr.rating) as highest,m.title from movierating mr left join Movies m on m.movie_id=mr.movie_id
+where mr.created_at between '2020-02-01' and '2020-02-29' group by mr.movie_id order by  highest desc ,m.title asc)as q limit 1)
